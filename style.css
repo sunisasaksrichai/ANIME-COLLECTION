@@ -228,7 +228,7 @@ nav a:focus-visible::after {
 .hero p {
   max-width: 420px;
   color: #c3bec9;
-  font-size: 15px;
+  font-size: 30px;
   line-height: 2;
   margin-bottom: 38px;
 }
