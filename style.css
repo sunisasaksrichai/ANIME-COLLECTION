@@ -242,7 +242,7 @@ nav a:focus-visible::after {
   padding: 16px 26px;
 
   background: var(--pink);
-  color: #151018;
+  color: #333035;
 
   border: 1px solid var(--pink);
   border-radius: 4px;
