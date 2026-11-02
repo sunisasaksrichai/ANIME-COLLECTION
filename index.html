@@ -1,0 +1,734 @@
+
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0b0f">
+
+  <title>Anime Collection | Personal Archive</title>
+
+  <!-- FAVICON - ไอคอนบนแท็บเว็บไซต์ -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <!-- ==========================================
+       01 FONTS - ฟอนต์ของเว็บไซต์
+  ========================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- ==========================================
+       02 CSS - ไฟล์ตกแต่งเว็บไซต์
+  ========================================== -->
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <!-- ==========================================
+       03 HEADER - โลโก้และเมนูด้านบน
+  ========================================== -->
+  <header class="site-header" id="top">
+
+    <a class="logo" href="#home">
+      ANIME<span>COLLECTION.</span>
+    </a>
+
+    <nav aria-label="เมนูหลัก">
+      <a href="#home">HOME</a>
+      <a href="#collection">COLLECTION</a>
+      <a href="#about">ABOUT</a>
+    </nav>
+
+  </header>
+
+
+  <main>
+
+    <!-- ==========================================
+         04 HOME - หน้าแรกของเว็บไซต์
+    ========================================== -->
+    <section class="hero" id="home">
+
+      <!-- ข้อความหน้าแรก -->
+      <div class="hero-content">
+
+        <span class="eyebrow">
+          <span class="dot"></span>
+          PERSONAL ANIME ARCHIVE
+        </span>
+
+        <h1>
+          EVERY STORY<br>
+          HAS A <em>PLACE.</em>
+        </h1>
+
+        <p>
+          พื้นที่เล็ก ๆ ที่รวบรวมอนิเมะและเรื่องที่หนูเคยดู
+          ทุกเรื่องมีความทรงจำที่แตกต่างกัน
+        </p>
+
+        <a class="primary-btn" href="#collection">
+          EXPLORE COLLECTION
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         05 COLLECTION - คอลเลกชันอนิเมะ
+    ========================================== -->
+    <section class="collection section-wrap" id="collection">
+
+      <!-- หัวข้อคอลเลกชัน -->
+      <div class="section-top">
+
+        <div>
+          <span class="eyebrow">THE ARCHIVE</span>
+
+          <h2>
+            ANIME <span>COLLECTION</span>
+          </h2>
+        </div>
+
+        <span class="total-count">26 TITLES</span>
+
+      </div>
+
+      <p class="section-intro">
+        เลือกดูเรื่องที่สนใจ ค้นหาชื่อ หรือกรองตามแนวเรื่องได้เลย
+      </p>
+
+      <!-- ช่องค้นหาและปุ่มกรองหมวดหมู่ -->
+      <div class="toolbar">
+
+        <label class="search-wrap">
+
+          <span aria-hidden="true">⌕</span>
+
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="ค้นหาชื่ออนิเมะ..."
+            aria-label="ค้นหาชื่ออนิเมะ"
+          >
+
+        </label>
+
+        <div
+          class="filters"
+          id="genreFilters"
+          aria-label="กรองแนวอนิเมะ"
+        ></div>
+
+      </div>
+
+      <!-- พื้นที่แสดงการ์ดอนิเมะ -->
+      <div class="anime-grid" id="animeGrid"></div>
+
+      <!-- ข้อความเมื่อค้นหาไม่พบ -->
+      <p class="empty-message" id="emptyMessage" hidden>
+        ไม่พบอนิเมะที่ค้นหา
+      </p>
+
+    </section>
+
+
+    <!-- ==========================================
+         06 ABOUT - เกี่ยวกับเว็บไซต์
+    ========================================== -->
+    <section class="about section-wrap" id="about">
+
+      <span class="eyebrow">
+        ABOUT THIS COLLECTION
+      </span>
+
+      <h2>
+        MORE THAN <span>JUST ANIME.</span>
+      </h2>
+
+      <p>
+        คอลเลกชันส่วนตัวที่รวบรวมอนิเมะหลากหลายแนวไว้ในที่เดียว
+        ตั้งแต่เรื่องราวแฟนตาซี แอ็กชัน ไปจนถึงความรักและมิตรภาพ
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <!-- ==========================================
+       07 ANIME MODAL - หน้าต่างอ่านรายละเอียด
+  ========================================== -->
+  <dialog
+    class="anime-modal"
+    id="animeModal"
+    aria-labelledby="modalTitle"
+  >
+
+    <button
+      class="modal-close"
+      id="modalClose"
+      type="button"
+      aria-label="ปิดรายละเอียด"
+    >
+      ×
+    </button>
+
+    <div class="modal-content">
+
+      <!-- รูปโปสเตอร์อนิเมะ -->
+      <img id="modalImage" alt="">
+
+      <!-- ข้อมูลและเรื่องย่อ -->
+      <div class="modal-info">
+
+        <span class="eyebrow" id="modalGenre"></span>
+
+        <h2 id="modalTitle"></h2>
+
+        <p id="modalThai"></p>
+
+        <span id="modalSeasons"></span>
+
+        <h3>เรื่องย่อ / SYNOPSIS</h3>
+
+        <p id="modalDescription"></p>
+
+      </div>
+
+    </div>
+
+  </dialog>
+
+
+  <!-- ==========================================
+       08 FOOTER - เครดิตผู้จัดทำ
+  ========================================== -->
+  <footer class="site-footer">
+
+    <div class="creator-credit">
+
+      <span class="creator-label">
+        DESIGNED & CREATED BY
+      </span>
+
+      <p class="creator-name">
+        สุนิษา ศักดิ์ศรีชัย
+      </p>
+
+      <span class="creator-id">
+        STUDENT ID <strong>68050146</strong>
+      </span>
+
+    </div>
+
+    <a class="back-to-top" href="#home">
+      BACK TO TOP ↑
+    </a>
+
+  </footer>
+
+
+  <!-- ==========================================
+       09 JAVASCRIPT - ระบบการทำงานของเว็บไซต์
+  ========================================== -->
+  <script>
+
+    // ==========================================
+    // 09.1 ANIME DATA - ข้อมูลอนิเมะทั้ง 26 เรื่อง
+    // ==========================================
+
+    const animeList = [
+
+      // 01 BLACK BUTLER
+      {
+        name: 'Black Butler',
+        thai: 'คนลึกไขปริศนา',
+        seasons: 5,
+        genre: 'Fantasy',
+        image: 'Black Butler.jpg',
+        description: 'ในอังกฤษยุควิกตอเรีย ซิเอล แฟนทอมไฮฟ์ ทำสัญญากับเซบาสเตียน พ่อบ้านปีศาจ เพื่อสืบหาความจริงและล้างแค้นให้กับเหตุการณ์ในอดีต'
+      },
+
+      // 02 BLACK CLOVER
+      {
+        name: 'Black Clover',
+        thai: 'แบล็คโคลเวอร์',
+        seasons: 4,
+        genre: 'Fantasy',
+        image: 'Black Clover.jpg',
+        description: 'อัสตา เด็กหนุ่มที่ไม่มีพลังเวท แต่ใฝ่ฝันอยากเป็นจักรพรรดิเวทมนตร์ ออกเดินทางพร้อมยูโน เพื่อนรักและคู่แข่งของเขา'
+      },
+
+      // 03 BUNGO STRAY DOGS
+      {
+        name: 'Bungo Stray Dogs',
+        thai: 'คณะประพันธกรจรจัด',
+        seasons: 5,
+        genre: 'Action',
+        image: 'Bungo Stray Dogs.jpg',
+        description: 'อัตสึชิได้เข้าร่วมสำนักงานนักสืบติดอาวุธ สมาชิกแต่ละคนมีพลังพิเศษ และต้องร่วมกันไขคดีพร้อมต่อสู้กับองค์กรอาชญากรรม'
+      },
+
+      // 04 DR. STONE
+      {
+        name: 'Dr. STONE',
+        thai: 'ด็อกเตอร์สโตน',
+        seasons: 4,
+        genre: 'Sci-Fi',
+        image: 'Dr. STONE.jpg',
+        description: 'หลังมนุษย์ทั่วโลกกลายเป็นหิน เซ็นคูตื่นขึ้นมาในอีกหลายพันปีต่อมาและตั้งเป้าฟื้นฟูอารยธรรมด้วยวิทยาศาสตร์'
+      },
+
+      // 05 FRIEREN
+      {
+        name: 'Frieren: Beyond Journey’s End',
+        thai: 'คำอธิษฐานในวันที่จากลา',
+        seasons: 2,
+        genre: 'Fantasy',
+        image: 'Frieren Beyond Journey’s End.jpg',
+        description: 'ฟรีเรน เอลฟ์นักเวทผู้มีอายุยืนยาว ออกเดินทางอีกครั้งหลังการจากไปของฮิมเมล เพื่อเรียนรู้ความรู้สึกของมนุษย์และความทรงจำ'
+      },
+
+      // 06 FRUITS BASKET
+      {
+        name: 'Fruits Basket',
+        thai: 'เสน่ห์สาวข้าวปั้น',
+        seasons: 3,
+        genre: 'Drama',
+        image: 'Fruits Basket.jpg',
+        description: 'โทรุ ฮอนดะ ได้เข้าไปอาศัยกับตระกูลโซมะและพบความลับของคำสาป 12 นักษัตร ก่อนเข้าไปเกี่ยวข้องกับความสัมพันธ์และความเจ็บปวดของคนในตระกูล'
+      },
+
+      // 07 GACHIAKUTA
+      {
+        name: 'Gachiakuta',
+        thai: 'กาจิอาคุตะ',
+        seasons: 1,
+        genre: 'Action',
+        image: 'Gachiakuta.jpg',
+        description: 'รูโด้ถูกใส่ร้ายและโยนลงสู่เหวที่เต็มไปด้วยขยะและสัตว์ประหลาด เขาต้องเอาชีวิตรอดและค้นหาความจริง'
+      },
+
+      // 08 HELL'S PARADISE
+      {
+        name: 'Hell’s Paradise',
+        thai: 'สุขาวดีอเวจี',
+        seasons: 2,
+        genre: 'Action',
+        image: 'Hell’s Paradise.jpg',
+        description: 'กาบิมารุ นักฆ่าที่ถูกตัดสินประหาร ได้รับโอกาสเป็นอิสระหากเดินทางไปเกาะลึกลับเพื่อค้นหายาอมตะ'
+      },
+
+      // 09 HUNTER X HUNTER
+      {
+        name: 'Hunter x Hunter',
+        thai: 'ฮันเตอร์ × ฮันเตอร์',
+        seasons: 6,
+        genre: 'Action',
+        image: 'Hunter x Hunter.jpg',
+        description: 'กอนออกเดินทางเพื่อเป็นฮันเตอร์ตามรอยพ่อ พร้อมคิรัว คุราปิก้า และเลโอริโอ ท่ามกลางบททดสอบและการผจญภัย'
+      },
+
+      // 10 KILL BLUE
+      {
+        name: 'Kill Blue',
+        thai: 'คิลบลู',
+        seasons: 2,
+        genre: 'Action',
+        image: 'Kill Blue.jpg',
+        description: 'จูโซ โอกามิ นักฆ่าระดับตำนานกลับกลายเป็นเด็กอายุ 13 ปี และต้องแฝงตัวเข้าไปเรียนในโรงเรียนมัธยมต้น'
+      },
+
+      // 11 LOVE THROUGH A PRISM
+      {
+        name: 'Love Through a Prism',
+        thai: 'ปริซึมแห่งรัก',
+        seasons: 1,
+        genre: 'Romance',
+        image: 'Love Through a Prism.jpg',
+        description: 'ลิลีเดินทางไปเรียนศิลปะที่ลอนดอนและได้พบกับคิต อัจฉริยะด้านศิลปะ ความสัมพันธ์ของทั้งคู่ค่อย ๆ พัฒนาท่ามกลางความฝัน'
+      },
+
+      // 12 MASHLE
+      {
+        name: 'MASHLE: MAGIC AND MUSCLES',
+        thai: 'ศึกเวทมนตร์คนพลังกล้าม',
+        seasons: 2,
+        genre: 'Fantasy',
+        image: 'MASHLE MAGIC AND MUSCLES.jpg',
+        description: 'แมชไม่มีพลังเวทในโลกที่ทุกคนใช้เวทมนตร์ได้ เขาจึงใช้พละกำลังเข้าสู้และเข้าเรียนในโรงเรียนเวทมนตร์'
+      },
+
+      // 13 OURAN HIGH SCHOOL HOST CLUB
+      {
+        name: 'Ouran High School Host Club',
+        thai: 'ชมรมรัก คลับมหาสนุก',
+        seasons: 1,
+        genre: 'Comedy',
+        image: 'Ouran High School Host Club.jpg',
+        description: 'ฮารุฮิทำแจกันราคาแพงแตกในชมรมโฮสต์ จึงต้องปลอมตัวเป็นโฮสต์ชายเพื่อทำงานชดใช้หนี้'
+      },
+
+      // 14 SAKAMOTO DAYS
+      {
+        name: 'SAKAMOTO DAYS',
+        thai: 'ซากาโมโตะเดส์',
+        seasons: 1,
+        genre: 'Action',
+        image: 'SAKAMOTO DAYS.jpg',
+        description: 'ซากาโมโตะ อดีตนักฆ่าระดับตำนานวางมือมาเปิดร้านสะดวกซื้อ แต่ศัตรูในอดีตกลับมาตามล่า'
+      },
+
+      // 15 SPARKS OF TOMORROW
+      {
+        name: 'Sparks of Tomorrow',
+        thai: 'ประกายฝัน วันพรุ่งนี้',
+        seasons: 1,
+        genre: 'Drama',
+        image: 'Sparks of Tomorrow.jpg',
+        description: 'คิฮาจิและอินาโกะออกเดินทางตามหาหนังสือประดิษฐ์ไฟฟ้าลึกลับในโลกที่เทคโนโลยีไอน้ำพัฒนาแทนไฟฟ้า'
+      },
+
+      // 16 SPY × FAMILY
+      {
+        name: 'SPY × FAMILY',
+        thai: 'สปาย × แฟมิลี',
+        seasons: 3,
+        genre: 'Action',
+        image: 'SPY × FAMILY.jpg',
+        description: 'ลอยด์ สายลับมือหนึ่งต้องสร้างครอบครัวปลอมเพื่อทำภารกิจลับ โดยมีอันยาและยอร์ร่วมเป็นครอบครัว'
+      },
+
+      // 17 THE APOTHECARY DIARIES
+      {
+        name: 'The Apothecary Diaries',
+        thai: 'สืบคดีปริศนาหมอยาตำรับโคมแดง',
+        seasons: 3,
+        genre: 'Mystery',
+        image: 'The Apothecary Diaries.jpg',
+        description: 'เมาเมา ผู้เชี่ยวชาญด้านยาและพิษ ถูกขายเข้าไปเป็นนางรับใช้ในวังหลวง และใช้ความรู้ช่วยไขคดีปริศนา'
+      },
+
+      // 18 WELCOME TO DEMON SCHOOL! IRUMA-KUN
+      {
+        name: 'Welcome to Demon School! Iruma-kun',
+        thai: 'อิรุมะคุง ผจญในโรงเรียนปีศาจ',
+        seasons: 4,
+        genre: 'Comedy',
+        image: 'Welcome to Demon School! Iruma-kun.jpg',
+        description: 'อิรุมะถูกพ่อแม่ขายให้ปีศาจ แต่กลับได้รับการเลี้ยงดูเหมือนหลานชาย และต้องปกปิดตัวตนมนุษย์ในโรงเรียนปีศาจ'
+      },
+
+      // 19 WISTORIA
+      {
+        name: 'Wistoria: Wand and Sword',
+        thai: 'ตำนานดาบและคทาแห่งวิสตอเรีย',
+        seasons: 2,
+        genre: 'Fantasy',
+        image: 'Wistoria Wand and Sword.jpg',
+        description: 'วิลไม่สามารถใช้เวทมนตร์ได้ แต่ใช้ทักษะดาบพิสูจน์ตัวเองและมุ่งหน้าสู่หอคอยจอมเวทเพื่อรักษาสัญญา'
+      },
+
+      // 20 WITCH HAT ATELIER
+      {
+        name: 'Witch Hat Atelier',
+        thai: 'จอมเวทฝึกหัดกับหมวกมหัศจรรย์',
+        seasons: 1,
+        genre: 'Fantasy',
+        image: 'Witch Hat Atelier.jpg',
+        description: 'โคโค่ใฝ่ฝันอยากเป็นแม่มด และเริ่มเรียนรู้เวทมนตร์หลังได้เป็นลูกศิษย์ของคีฟรีย์'
+      },
+
+      // 21 KONOSUBA
+      {
+        name: 'KonoSuba',
+        thai: 'ขอให้โชคดีมีชัยในโลกแฟนตาซี!',
+        seasons: 3,
+        genre: 'Fantasy',
+        image: 'KonoSuba.jpg',
+        description: 'คาซึมะเสียชีวิตและได้ไปเกิดใหม่ในโลกแฟนตาซี พร้อมกับเทพธิดาอควา ก่อนจะรวมทีมกับเมกุมินและดาร์กเนส ออกผจญภัยสุดป่วนที่เต็มไปด้วยเรื่องราวชวนหัวเราะ'
+      },
+
+      // 22 SWORD ART ONLINE
+      {
+        name: 'Sword Art Online',
+        thai: 'ซอร์ดอาร์ตออนไลน์',
+        seasons: 4,
+        genre: 'Action',
+        image: 'Sword Art Online.jpg',
+        description: 'คิริโตะและผู้เล่นนับพันติดอยู่ในเกมเสมือนจริงที่ไม่สามารถออกจากระบบได้ หากตายในเกมก็จะเสียชีวิตในโลกจริง เขาจึงต้องต่อสู้เพื่อเอาชีวิตรอดและหาทางกลับสู่โลกภายนอก'
+      },
+
+      // 23 GINTAMA
+      {
+        name: 'Gintama',
+        thai: 'กินทามะ',
+        seasons: 8,
+        genre: 'Comedy',
+        image: 'Gintama.jpg',
+        description: 'ในยุคเอโดะที่ถูกมนุษย์ต่างดาวเข้ายึดครอง ซากาตะ กินโทกิ อดีตซามูไร เปิดร้านรับจ้างสารพัดร่วมกับชินปาจิและคางุระ พบเจอทั้งเรื่องราวสุดฮาและการต่อสู้สุดเข้มข้น'
+      },
+
+      // 24 CARDFIGHT!! VANGUARD DIVINEZ
+      {
+        name: 'Cardfight!! Vanguard Divinez',
+        thai: 'การ์ดไฟท์!! แวนการ์ด ดิไวน์ซ',
+        seasons: 3,
+        genre: 'Action',
+        image: 'Cardfight!! Vanguard Divinez.jpg',
+        description: 'อากินะ เมียวโดะ ได้รับการ์ดแห่งโชคชะตาและเข้าร่วมการแข่งขันการ์ดไฟท์ที่เรียกว่า Fated Clash ซึ่งผู้ชนะจะได้รับโอกาสทำให้ความปรารถนาเป็นจริง'
+      },
+
+      // 25 KERORO
+      {
+        name: 'Keroro',
+        thai: 'เคโรโระ ขบวนการอ๊บอ๊บป่วนโลก',
+        seasons: 7,
+        genre: 'Comedy',
+        image: 'Keroro.jpg',
+        description: 'สิบโทเคโรโระ มนุษย์ต่างดาวรูปร่างคล้ายกบ เดินทางมายังโลกเพื่อทำภารกิจยึดครอง แต่กลับต้องมาอาศัยอยู่กับครอบครัวฮินาตะ และสร้างเรื่องวุ่นวายร่วมกับสมาชิกกองร้อยเคโรโระ'
+      },
+
+      // 26 NARUTO SHIPPUDEN
+      {
+        name: 'Naruto Shippuden',
+        thai: 'นารูโตะ ตำนานวายุสลาตัน',
+        seasons: 21,
+        genre: 'Action',
+        image: 'naruto shippuden.jpg',
+        description: 'อุซึมากิ นารูโตะ กลับสู่หมู่บ้านโคโนฮะหลังฝึกฝนกับจิไรยะ และออกเดินทางเพื่อช่วยซาสึเกะกลับมา พร้อมเผชิญหน้ากับองค์กรแสงอุษาและสงครามโลกนินจาที่จะเปลี่ยนชะตาของโลก'
+      }
+
+    ];
+
+
+    // ==========================================
+    // 09.2 ELEMENTS - เชื่อม JavaScript กับ HTML
+    // ==========================================
+
+    const grid = document.getElementById('animeGrid');
+    const searchInput = document.getElementById('searchInput');
+    const filters = document.getElementById('genreFilters');
+    const emptyMessage = document.getElementById('emptyMessage');
+
+    // หน้าต่างรายละเอียด
+    const animeModal = document.getElementById('animeModal');
+    const modalClose = document.getElementById('modalClose');
+
+    const modalImage = document.getElementById('modalImage');
+    const modalGenre = document.getElementById('modalGenre');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalThai = document.getElementById('modalThai');
+    const modalSeasons = document.getElementById('modalSeasons');
+    const modalDescription = document.getElementById('modalDescription');
+
+    let activeGenre = 'All';
+
+
+    // ==========================================
+    // 09.3 OPEN MODAL - เปิดรายละเอียดอนิเมะ
+    // ==========================================
+
+    function openAnimeModal(anime) {
+
+      // ใช้รูปเดิมจากโฟลเดอร์ images
+      modalImage.src = 'images/' + anime.image;
+      modalImage.alt = 'โปสเตอร์ ' + anime.name;
+
+      // ใช้ข้อมูลเดิมจาก animeList
+      modalGenre.textContent = anime.genre;
+      modalTitle.textContent = anime.name;
+      modalThai.textContent = anime.thai;
+
+      modalSeasons.textContent =
+        `${anime.seasons} ${anime.seasons === 1 ? 'SEASON' : 'SEASONS'}`;
+
+      modalDescription.textContent = anime.description;
+
+      animeModal.showModal();
+
+    }
+
+
+    // ==========================================
+    // 09.4 CREATE CARD - สร้างการ์ดอนิเมะ
+    // ==========================================
+
+    function createCard(anime) {
+
+      const card = document.createElement('article');
+      card.className = 'anime-card';
+
+      // ปุ่มกดเปิดรายละเอียด
+      const toggle = document.createElement('button');
+      toggle.className = 'card-toggle';
+      toggle.type = 'button';
+      toggle.setAttribute('aria-haspopup', 'dialog');
+      toggle.setAttribute('aria-label', 'อ่านรายละเอียด ' + anime.name);
+
+      // รูปโปสเตอร์
+      const image = document.createElement('img');
+      image.src = 'images/' + anime.image;
+      image.alt = 'โปสเตอร์ ' + anime.name;
+      image.loading = 'lazy';
+
+      image.addEventListener('error', () => {
+        image.classList.add('image-missing');
+      });
+
+      const poster = document.createElement('div');
+      poster.className = 'poster';
+      poster.appendChild(image);
+
+      // ป้ายหมวดหมู่
+      const label = document.createElement('span');
+      label.className = 'poster-genre';
+      label.textContent = anime.genre;
+      poster.appendChild(label);
+
+      // ชื่ออนิเมะและจำนวนซีซัน
+      const info = document.createElement('div');
+      info.className = 'card-info';
+
+      const title = document.createElement('h3');
+      title.textContent = anime.name;
+
+      const thai = document.createElement('p');
+      thai.textContent = anime.thai;
+
+      const meta = document.createElement('div');
+      meta.className = 'card-meta';
+      meta.textContent =
+        `${anime.seasons} ${anime.seasons === 1 ? 'SEASON' : 'SEASONS'}  ·  VIEW DETAILS  ↗`;
+
+      info.append(title, thai, meta);
+      toggle.append(poster, info);
+      card.appendChild(toggle);
+
+      // เปิดหน้าต่างเมื่อกดการ์ด
+      toggle.addEventListener('click', () => {
+        openAnimeModal(anime);
+      });
+
+      return card;
+
+    }
+
+
+    // ==========================================
+    // 09.5 SEARCH & FILTER - ค้นหาและกรองอนิเมะ
+    // ==========================================
+
+    function render() {
+
+      const q = searchInput.value.trim().toLocaleLowerCase();
+
+      const matches = animeList.filter(a =>
+        (activeGenre === 'All' || a.genre === activeGenre) &&
+        (
+          a.name.toLocaleLowerCase().includes(q) ||
+          a.thai.toLocaleLowerCase().includes(q)
+        )
+      );
+
+      grid.replaceChildren(
+        ...matches.map(a => createCard(a))
+      );
+
+      emptyMessage.hidden = matches.length !== 0;
+
+    }
+
+
+    // ==========================================
+    // 09.6 GENRE BUTTONS - สร้างปุ่มหมวดหมู่
+    // ==========================================
+
+    ['All', ...new Set(animeList.map(a => a.genre))].forEach(genre => {
+
+      const btn = document.createElement('button');
+
+      btn.type = 'button';
+      btn.className = 'filter-btn' + (genre === 'All' ? ' active' : '');
+      btn.textContent = genre;
+
+      // บอกสถานะว่าปุ่มนี้ถูกเลือกอยู่หรือไม่
+      btn.setAttribute(
+        'aria-pressed',
+        genre === 'All' ? 'true' : 'false'
+      );
+
+      btn.addEventListener('click', () => {
+
+        activeGenre = genre;
+
+        filters.querySelectorAll('button').forEach(b => {
+
+          const selected = b === btn;
+
+          b.classList.toggle('active', selected);
+          b.setAttribute('aria-pressed', String(selected));
+
+        });
+
+        render();
+
+      });
+
+      filters.appendChild(btn);
+
+    });
+
+
+    // ==========================================
+    // 09.7 CLOSE MODAL - ปิดหน้าต่างรายละเอียด
+    // ==========================================
+
+    // ปิดด้วยปุ่ม X
+    modalClose.addEventListener('click', () => {
+      animeModal.close();
+    });
+
+    // ปิดเมื่อคลิกพื้นหลังมืด
+    animeModal.addEventListener('click', (event) => {
+
+      const rect = animeModal.getBoundingClientRect();
+
+      const clickedOutside =
+        event.clientX < rect.left ||
+        event.clientX > rect.right ||
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom;
+
+      if (clickedOutside) {
+        animeModal.close();
+      }
+
+    });
+
+    // ปุ่ม Esc ปิดได้ตามระบบของ dialog
+
+
+    // ==========================================
+    // 09.8 START - เริ่มต้นการทำงาน
+    // ==========================================
+
+    searchInput.addEventListener('input', render);
+
+    render();
+
+  </script>
+
+</body>
+</html>
